@@ -10,38 +10,38 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(PlaceController.class)
-class PlaceControllerTest {
+@WebMvcTest(EventController.class)
+class EventControllerTest {
 
     private final MockMvc mvc;
 
-    public PlaceControllerTest(@Autowired MockMvc mvc) {
+    public EventControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
 
-    @DisplayName("[view][GET] 장소 리스트 페이지")
+    @DisplayName("[view][GET] 이벤트 리스트 페이지")
     @Test
-    void givenNothing_whenRequestingPlacesPage_thenReturnsPlacesPage() throws Exception {
+    void givenNothing_whenRequestingEventsPage_thenReturnsEventsPage() throws Exception {
         // Given
 
         // When & Then
-        mvc.perform(get("/places"))
+        mvc.perform(get("/events"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("place/index"));
+                .andExpect(view().name("event/index"));
     }
 
-    @DisplayName("[view][GET] 장소 세부 정보 페이지")
+    @DisplayName("[view][GET] 이벤트 세부 정보 페이지")
     @Test
-    void givenNothing_whenRequestingPlaceDetailPage_thenReturnsPlaceDetailPage() throws Exception {
+    void givenNothing_whenRequestingEventDetailPage_thenReturnsEventDetailPage() throws Exception {
         // Given
-        long placeId = 1L;
+        long eventId = 1L;
 
         // When & Then
-        mvc.perform(get("/places/" + placeId))
+        mvc.perform(get("/events/" + eventId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("place/detail"));
+                .andExpect(view().name("event/detail"));
     }
 
 }

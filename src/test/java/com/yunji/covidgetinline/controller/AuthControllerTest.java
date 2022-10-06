@@ -7,41 +7,43 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(PlaceController.class)
-class PlaceControllerTest {
+@WebMvcTest(AuthController.class)
+class AuthControllerTest {
 
     private final MockMvc mvc;
 
-    public PlaceControllerTest(@Autowired MockMvc mvc) {
+    public AuthControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
 
-    @DisplayName("[view][GET] 장소 리스트 페이지")
+    @DisplayName("[view][GET] 로그인 페이지")
     @Test
-    void givenNothing_whenRequestingPlacesPage_thenReturnsPlacesPage() throws Exception {
+    void givenNothing_whenRequestingLoginPage_thenReturnsLoginPage() throws Exception {
         // Given
 
         // When & Then
-        mvc.perform(get("/places"))
+        mvc.perform(get("/login"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("place/index"));
+                .andExpect(content().string(containsString("This is login page.")))
+                .andExpect(view().name("auth/login"));
     }
 
-    @DisplayName("[view][GET] 장소 세부 정보 페이지")
+    @DisplayName("[view][GET] 어드민 회원 가입 페이지")
     @Test
-    void givenNothing_whenRequestingPlaceDetailPage_thenReturnsPlaceDetailPage() throws Exception {
+    void givenNothing_whenRequestingSignUpPage_thenReturnsSignUpPage() throws Exception {
         // Given
-        long placeId = 1L;
 
         // When & Then
-        mvc.perform(get("/places/" + placeId))
+        mvc.perform(get("/sign-up"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("place/detail"));
+                .andExpect(content().string(containsString("This is sign-up page.")))
+                .andExpect(view().name("auth/sign-up"));
     }
 
 }
