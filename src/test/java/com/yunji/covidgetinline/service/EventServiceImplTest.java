@@ -327,6 +327,7 @@ class EventServiceImplTest {
     ) {
         return EventDTO.of(
                 placeId,
+                1L,
                 eventName,
                 eventStatus,
                 eventStartDateTime,
