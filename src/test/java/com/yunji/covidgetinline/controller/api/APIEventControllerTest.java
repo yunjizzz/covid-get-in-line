@@ -33,7 +33,8 @@ class APIEventControllerTest {
     private final MockMvc mvc;
     private final ObjectMapper mapper;
 
-    @MockBean private EventService eventService;
+    @MockBean
+    private EventService eventService;
 
     public APIEventControllerTest(
             @Autowired MockMvc mvc,
